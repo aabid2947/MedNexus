@@ -1,6 +1,6 @@
 import ContractABI from "../Blockchain/build/contracts/Hospital_Contract.json";
 import Web3 from "web3";
-const contractAddress = "0xc77Ee6cD15D567B90D30C932C8ce5164A0ceb5F5"; // Replace with your contract address
+const contractAddress = "0x70c3d934594EaDb2F3FF4F5A21366c949c3d7533"; // Replace with your contract address
 
 // Hospital registration
 export const handle_hospital_register = async (
@@ -228,13 +228,9 @@ export const get_patient_lists =async () =>{
        
       )
       .call();
-      console.log(90)
+     
       
-      console.log(everyPatient);
-      console.log(98)
-
-    alert("User registered successfully!");
-    return true;
+    return everyPatient;
   } catch (error) {
     console.error("Error registering user:", error);
   }

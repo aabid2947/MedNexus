@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { get_patient_lists } from "../utils/Contract";
 
 
@@ -9,15 +9,18 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
       left: rectangleIconLeft,
     };
   }, [rectangleIconTop, rectangleIconLeft]);
+  const [count,setCount] = useState(0);
 
-  const [patient_list,setPatient_list] = useState([]);
+  const [patient_list, setPatient_list] = useState([
 
-  const get_patient_list = async ()=>{
-    const _patient_list = await get_patient_lists();
-    setPatient_list(_patient_list);
-    console.log(patient_list);
+  ]);
 
- }
+  useEffect( ()=>{
+    
+    setPatient_list(get_patient_lists());
+    console.log(patient_list)
+
+  },count)
   return (
     <div
       className="absolute top-[31.063rem] left-[22.313rem] w-[60.5rem] h-[50.75rem] text-left text-[0.75rem] text-blueviolet font-heading-2-20"
@@ -34,6 +37,7 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
       <div className="absolute top-[2.75rem] left-[2.25rem] text-[1.5rem] tracking-[-0.01em] font-semibold text-text-100">
         All Patients
       </div>
+
       <div className="absolute top-[8.188rem] left-[0rem] w-[60.5rem] h-[36.688rem] text-[0.875rem] text-whitesmoke-200">
         <div className="absolute top-[0rem] left-[2.375rem] w-[53.938rem] h-[1.313rem] text-silver">
           <div className="absolute top-[0rem] left-[0rem] tracking-[-0.01em] font-medium">
@@ -55,21 +59,24 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
             Status
           </div>
         </div>
-        <div className="absolute top-[3.438rem] left-[2.375rem] w-[55.375rem] h-[1.813rem]">
+
+        {/* {patient_list.map((_patient, index) => (
+          
+          <div key = {index} style={{ top: `${3.37+index*5}rem` }} className="absolute  left-[2.375rem] w-[55.375rem] h-[1.813rem]">
           <div className="absolute top-[0.25rem] left-[0rem] tracking-[-0.01em] font-medium">
-            Jane Cooper
+            {_patient.name}
           </div>
           <div className="absolute top-[0.25rem] left-[10.75rem] tracking-[-0.01em] font-medium">
             Microsoft
           </div>
           <div className="absolute top-[0.25rem] left-[18.938rem] tracking-[-0.01em] font-medium">
-            (225) 555-0118
+            {_patient.phone_number}
           </div>
           <div className="absolute top-[0.25rem] left-[28.688rem] tracking-[-0.01em] font-medium">
             jane@microsoft.com
           </div>
           <div className="absolute top-[0.25rem] left-[41.625rem] tracking-[-0.01em] font-medium">
-            United States
+            India
           </div>
           <div className="absolute top-[0rem] left-[50.375rem] rounded bg-mediumaquamarine box-border w-[5rem] flex flex-row items-center justify-center py-[0.25rem] px-[0.75rem] text-seagreen border-[1px] border-solid border-mediumseagreen">
             <button onClick={get_patient_list} className="relative tracking-[-0.01em] font-medium">
@@ -77,6 +84,10 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
             </button>
           </div>
         </div>
+
+  ))} */}
+
+        
         <div className="absolute top-[7.75rem] left-[2.375rem] w-[55.375rem] h-[1.813rem]">
           <div className="absolute top-[0.25rem] left-[0rem] tracking-[-0.01em] font-medium">
             Floyd Miles

@@ -18,6 +18,8 @@ import PatientRegistration from "./pages/patient-registration";
 import DoctorDashboard from "./pages/doctor-dashboard";
 import Home from "./pages/home";
 import "./global.css";
+import Files from "./pages/filles.jsx";
+import Record from "./pages/record.jsx";
 
 const muiTheme = createTheme();
 
@@ -63,7 +65,16 @@ const router = createBrowserRouter([
   {
     path:"/doctor-dashboard",
     element:<DoctorDashboard/>
+  },
+  {
+    path:"/patient-files",
+    element:<Files/>
+  },
+  {
+    path:"/records",
+    element:<Record/>
   }
+
 
 
 

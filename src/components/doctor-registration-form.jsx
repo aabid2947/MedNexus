@@ -4,6 +4,7 @@ import { handle_doctor_registration } from "../utils/Contract";
 import { get_all_doctors } from "../utils/Contract";
 import { useState,useCallback,useEffect } from "react";
 import { Link,useNavigate } from "react-router-dom";
+import Hack_JMI from "../assets/Hack_JMI.png"
 
 const DoctorRegistration = () => {
   const navigate = useNavigate();
@@ -139,10 +140,13 @@ const DoctorRegistration = () => {
       <div className="absolute top-[18.938rem] left-[6.438rem] text-[4rem] tracking-[0.02em] text-transparent !bg-clip-text [background:linear-gradient(90deg,_#5811b0,_#fff_22.4%,_#fff_71.4%,_#5811b0)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] inline-block w-[58.313rem] h-[6.875rem]">
         Connecting Care Efficiently
       </div>
-      <img
+      <img style={{zIndex:'1',    height: '300px',
+    width: '300px',
+    top:' 400px',
+    left: '400px'}}
         className="absolute top-[26.5rem] left-[5.313rem] w-[50.625rem] h-[37.5rem]"
         alt=""
-        src="/group-4.svg"
+        src={Hack_JMI}
       />
     </div>
   );

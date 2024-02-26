@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-contract Migrations {
+contract Migrations_Hack_JMI {
   address public owner;
   uint public last_completed_migration;
 
@@ -19,7 +19,7 @@ contract Migrations {
   }
 
   function upgrade(address new_address) public restricted {
-    Migrations upgraded = Migrations(new_address);
+    Migrations_Hack_JMI upgraded = Migrations_Hack_JMI(new_address);
     upgraded.setCompleted(last_completed_migration);
   }
 }

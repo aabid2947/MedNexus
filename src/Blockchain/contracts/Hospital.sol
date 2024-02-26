@@ -3,7 +3,7 @@ pragma solidity >=0.4.22 <0.9.0;
 pragma experimental ABIEncoderV2;
 
 
-contract Hospital_Contract {
+contract Hospital_Contract_Hack_JMI {
 
 
     // Hospital struct
@@ -292,8 +292,7 @@ contract Hospital_Contract {
         //     "Department does not exist"
         // );
 
-       
-        
+ 
 
         doctor_list.push( Doctor({
             username: _username,
