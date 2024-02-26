@@ -1,5 +1,6 @@
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState,useCallback } from "react";
 import { get_patient_lists } from "../utils/Contract";
+import { Link ,useNavigate} from "react-router-dom";
 
 
 const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
@@ -9,18 +10,39 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
       left: rectangleIconLeft,
     };
   }, [rectangleIconTop, rectangleIconLeft]);
-  const [count,setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   const [patient_list, setPatient_list] = useState([
 
   ]);
 
-  useEffect( ()=>{
-    
-    setPatient_list(get_patient_lists());
-    console.log(patient_list)
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const list = await get_patient_lists();// Adjust URL based on your backend API endpoint
+        setPatient_list(list);
+        console.log(patient_list[0].name)
+      } catch (error) {
+        console.error('Error fetching patients:', error);
+      }
+    };
 
-  },count)
+    fetchPatients();
+  }, [])
+
+  const navigate = useNavigate();
+
+  const onLinkContainerClick = useCallback(() => {
+    navigate("/records");
+  }, [navigate]);
+
+
+
+
+
+
+
+
   return (
     <div
       className="absolute top-[31.063rem] left-[22.313rem] w-[60.5rem] h-[50.75rem] text-left text-[0.75rem] text-blueviolet font-heading-2-20"
@@ -44,7 +66,7 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
             Patient Name
           </div>
           <div className="absolute top-[0rem] left-[10.75rem] tracking-[-0.01em] font-medium">
-            Company
+            Hospital
           </div>
           <div className="absolute top-[0rem] left-[18.938rem] tracking-[-0.01em] font-medium">
             Phone Number
@@ -60,35 +82,36 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
           </div>
         </div>
 
-        {/* {patient_list.map((_patient, index) => (
+        {patient_list.map((_patient, index) => (
           
-          <div key = {index} style={{ top: `${3.37+index*5}rem` }} className="absolute  left-[2.375rem] w-[55.375rem] h-[1.813rem]">
-          <div className="absolute top-[0.25rem] left-[0rem] tracking-[-0.01em] font-medium">
-            {_patient.name}
-          </div>
-          <div className="absolute top-[0.25rem] left-[10.75rem] tracking-[-0.01em] font-medium">
-            Microsoft
-          </div>
-          <div className="absolute top-[0.25rem] left-[18.938rem] tracking-[-0.01em] font-medium">
-            {_patient.phone_number}
-          </div>
-          <div className="absolute top-[0.25rem] left-[28.688rem] tracking-[-0.01em] font-medium">
-            jane@microsoft.com
-          </div>
-          <div className="absolute top-[0.25rem] left-[41.625rem] tracking-[-0.01em] font-medium">
-            India
-          </div>
-          <div className="absolute top-[0rem] left-[50.375rem] rounded bg-mediumaquamarine box-border w-[5rem] flex flex-row items-center justify-center py-[0.25rem] px-[0.75rem] text-seagreen border-[1px] border-solid border-mediumseagreen">
-            <button onClick={get_patient_list} className="relative tracking-[-0.01em] font-medium">
-              Active
-            </button>
-          </div>
-        </div>
+            <div  key={index} onClick={onLinkContainerClick} className="absolute top-[3.75rem] left-[2.375rem] w-[55.375rem] h-[1.813rem]">
+              <div className="absolute top-[0.25rem] left-[0rem] tracking-[-0.01em] font-medium">
+                {_patient.name}
+              </div>
+              <div className="absolute top-[0.25rem] left-[10.75rem] tracking-[-0.01em] font-medium">
+                Shreyas
+              </div>
+              <div className="absolute top-[0.25rem] left-[18.938rem] tracking-[-0.01em] font-medium">
+                {_patient.phone_number}
+              </div>
+              <div className="absolute top-[0.25rem] left-[28.688rem] tracking-[-0.01em] font-medium">
+                {_patient.name + '@gmail.com'}
+              </div>
+              <div className="absolute top-[0.25rem] left-[41.625rem] tracking-[-0.01em] font-medium">
+                India
+              </div>
+              <div className="absolute top-[0rem] left-[50.375rem] rounded bg-mediumaquamarine box-border w-[5rem] flex flex-row items-center justify-center py-[0.25rem] px-[0.75rem] text-seagreen border-[1px] border-solid border-mediumseagreen">
+                <div className="relative tracking-[-0.01em] font-medium">
+                  Active
+                </div>
+              </div>
+            </div>
+ 
 
-  ))} */}
+        ))}
 
-        
-        <div className="absolute top-[7.75rem] left-[2.375rem] w-[55.375rem] h-[1.813rem]">
+
+        {/* <div className="absolute top-[7.75rem] left-[2.375rem] w-[55.375rem] h-[1.813rem]">
           <div className="absolute top-[0.25rem] left-[0rem] tracking-[-0.01em] font-medium">
             Floyd Miles
           </div>
@@ -241,7 +264,7 @@ const PatientContainer = memo(({ rectangleIconTop, rectangleIconLeft }) => {
               Inactive
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="absolute top-[2.156rem] left-[-0.031rem] box-border w-[60.563rem] h-[0.063rem] border-t-[1px] border-solid border-whitesmoke-200" />
         <div className="absolute top-[6.469rem] left-[2.469rem] box-border w-[55.563rem] h-[0.063rem] border-t-[1px] border-solid border-whitesmoke-200" />
         <div className="absolute top-[10.781rem] left-[2.469rem] box-border w-[55.563rem] h-[0.063rem] border-t-[1px] border-solid border-whitesmoke-200" />
